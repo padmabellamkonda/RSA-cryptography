@@ -153,7 +153,7 @@ int modBySquares (int C, int d, int n){
 int main()
 { 
     //130
-   std::vector <int> encryptedMsg (134); 
+   std::vector <int> encryptedMsg (118); 
    encryptedMsg = {    30, 673, 332, 785, 171, 589, 782, 171, 828, 589, 785, 568, 782, 785, 713, 782, 813, 785, 123, 589, 828, 673, 589, 487,589, 785, 813, 890, 243, 813, 785, 733, 243, 813, 890, 589,733, 243, 813, 673, 422, 769, 785, 673, 769, 785, 769, 673,733, 171, 828, 589, 291, 785, 673, 813, 785, 673, 769, 785,
                                 782, 713, 828, 482, 785, 123, 589, 422, 243, 500, 769, 589,
                                 785, 813, 890, 589, 482, 785, 568, 782, 785, 713, 782, 813,
@@ -163,7 +163,7 @@ int main()
                             };
     //30  
     std::vector <char> message(35);
-    message = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',  ' ', '\"', '. ', ', ', '\''};
+    message = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',  ' ', '\"', '.', ',', '\''};
 
     int phi;
     int d;
@@ -190,12 +190,12 @@ int main()
     d = findD(e,phi);
     cout << d << " " << endl;
     
-    //for (int i = 0; i < 130; ++i){
-        cout << encryptedMsg.at(129) << " " << endl; 
-        decrypt = modBySquares(encryptedMsg.at(129),d,n);
-        cout << decrypt << endl;
-        cout << message.at(decrypt - 4) << " " << endl; 
-   // }
+    for (int i = 0; i < 118; ++i){
+        //cout << encryptedMsg.at(i) << " " << endl; 
+        decrypt = modBySquares(encryptedMsg.at(i),d,n);
+        //cout << decrypt << endl;
+        cout << message.at(decrypt - 3) << " "; 
+   }
     
      
     // cout << d << endl;
