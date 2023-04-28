@@ -153,14 +153,7 @@ int modBySquares (int C, int d, int n){
 int main()
 { 
     //130
-   std::vector <int> encryptedMsg (118); 
-   encryptedMsg = {    30, 673, 332, 785, 171, 589, 782, 171, 828, 589, 785, 568, 782, 785, 713, 782, 813, 785, 123, 589, 828, 673, 589, 487,589, 785, 813, 890, 243, 813, 785, 733, 243, 813, 890, 589,733, 243, 813, 673, 422, 769, 785, 673, 769, 785, 769, 673,733, 171, 828, 589, 291, 785, 673, 813, 785, 673, 769, 785,
-                                782, 713, 828, 482, 785, 123, 589, 422, 243, 500, 769, 589,
-                                785, 813, 890, 589, 482, 785, 568, 782, 785, 713, 782, 813,
-                                785, 549, 589, 243, 828, 673, 367, 589, 785, 890, 782, 587,
-                                785, 422, 782, 733, 171, 828, 673, 422, 243, 813, 589, 568,
-                                785, 828, 673, 332, 589, 785, 673, 769, 777, 30
-                            };
+    
     //30  
     std::vector <char> message(35);
     message = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',  ' ', '\"', '.', ',', '\''};
@@ -168,12 +161,27 @@ int main()
     int phi;
     int d;
     int n;
-    cout << "Enter a n value" << endl; 
-    cin >> n;
+    int messageInput;
     int e;
+    int messageLength;
+    int decrypt;
+
     cout << "Enter an e value" << endl;
     cin >> e;
-    int decrypt;
+    cout << "Enter a n value" << endl; 
+    cin >> n;
+    cout << "Enter the length of message" << endl; 
+    cin >> messageLength;
+
+    std::vector <int> encryptedMsg;
+    cout << "Enter the message(encrypted)" << endl;
+    for (int i = 0; i < messageLength; ++i) {
+        cin >> messageInput;
+        //cout << messageInput << " ";
+        encryptedMsg.push_back(messageInput);
+        //cout << encryptedMsg.at(i) << " "; 
+    }
+   
     
 //    if(isPrime(367)) {
 //      cout << "yes its prime" << endl;
@@ -181,22 +189,28 @@ int main()
 //     cout << "no" << endl;
 //    }
 
+
    
    
     findFactors(n);
-    cout << pq.at(0) << " " << pq.at(1) << " ";
     phi = findPhi(); 
-    cout << phi << " ";
     d = findD(e,phi);
-    cout << d << " " << endl;
+
+    cout << pq.at(0) << " " << pq.at(1) << " " << phi << " " << d << endl; 
     
-    for (int i = 0; i < 118; ++i){
+//     for (int i = 0; i < messageLength - 1; ++i){
+//         cout << encryptedMsg.at(i) << " " << endl; 
+//    }
+
+    for (int i = 0; i < messageLength; ++i){
         //cout << encryptedMsg.at(i) << " " << endl; 
         decrypt = modBySquares(encryptedMsg.at(i),d,n);
         //cout << decrypt << endl;
         cout << message.at(decrypt - 3) << " "; 
    }
-    
+   cout << endl;
+
+
      
     // cout << d << endl;
     
