@@ -166,15 +166,15 @@ int main()
     int messageLength;
     int decrypt;
 
-    cout << "Enter an e value" << endl;
+    //cout << "Enter an e value" << endl;
     cin >> e;
-    cout << "Enter a n value" << endl; 
+    //cout << "Enter a n value" << endl; 
     cin >> n;
-    cout << "Enter the length of message" << endl; 
+    //cout << "Enter the length of message" << endl; 
     cin >> messageLength;
 
     std::vector <int> encryptedMsg;
-    cout << "Enter the message(encrypted)" << endl;
+    //cout << "Enter the message(encrypted)" << endl;
     for (int i = 0; i < messageLength; ++i) {
         cin >> messageInput;
         //cout << messageInput << " ";
@@ -201,12 +201,19 @@ int main()
 //     for (int i = 0; i < messageLength - 1; ++i){
 //         cout << encryptedMsg.at(i) << " " << endl; 
 //    }
+     for (int i = 0; i < messageLength; ++i){
+        //cout << encryptedMsg.at(i) << " " << endl; 
+        decrypt = modBySquares(encryptedMsg.at(i),d,n);
+        cout << decrypt << " ";
+        //cout << message.at(decrypt - 3) << " "; 
+   }
+   cout << endl;
 
     for (int i = 0; i < messageLength; ++i){
         //cout << encryptedMsg.at(i) << " " << endl; 
         decrypt = modBySquares(encryptedMsg.at(i),d,n);
         //cout << decrypt << endl;
-        cout << message.at(decrypt - 3) << " "; 
+        cout << message.at(decrypt - 3); 
    }
    cout << endl;
 
