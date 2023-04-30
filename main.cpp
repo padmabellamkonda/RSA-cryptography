@@ -2,10 +2,10 @@
 #include <vector>
 #include <string>
 #include <cstdlib>
+#include <cmath>
 
 using namespace std;
 vector<int> pq;
-
 
 bool isPrime(int n) {
 
@@ -77,58 +77,69 @@ int findPhi()
 
 };
 int findD(int e, int phi){
-    int d; 
-    int tempD1;
-    int tempD2; 
-    
-    vector<int> multiplesofe;
-    for (int i = 1; i < phi; ++i) {
-        //cout << "in the multiples loop" << endl;
-        int num = i * e;
-        //cout << num << " ";
-        multiplesofe.push_back(num);
-    }
-    //cout << endl;
 
-    // for (int i = 0; i < multiplesofe.size(); ++i)
-    // {
-    //   cout << "multiples of e: " << multiplesofe.at(i) << " " << endl;
-    // }
-    //cout << "out of loop" << endl;
-
-   //  for (int i = 0; i < pq.size(); ++i)
-   //  {
-   //    if (pq.at(i) < phi)
-   //    {
-   //       pq.pop_front();
-   //    }
-   //  }
-
-    for (int i = 2; i < phi; ++i){
-       // cout << "in the phi loop" << endl;
-        for (int j = 1; j < multiplesofe.size(); ++j) {
-            //cout << "in the check phi and multofe loop " << j << endl;
-            if ((phi * i) == (multiplesofe.at(j)+1) || (phi * i) == (multiplesofe.at(j)-1)){
-                tempD1 = i;
-                //cout << tempD1 << endl;
-                tempD2 = j+1;
-                //cout << tempD2 << endl;
-                i = phi;
-                break;
-                
-            }
+    int d = 0; 
+    for (int i = 1; i < phi; ++i)
+    {
+        int tempD = e * i;
+        if (tempD % phi == 1)
+        {
+            d = i;
+            break;
         }
+    }
+//     int d; 
+//     int tempD1;
+//     int tempD2; 
     
-    }
-    if((tempD2*e - tempD1*phi) == 1) {
+//     vector<int> multiplesofe;
+//     for (int i = 1; i < phi/3; ++i) {
+//         //cout << "in the multiples loop" << endl;
+//         int num = i * e;
+//         //cout << num << " ";
+//         multiplesofe.push_back(num);
+//     }
+//     //cout << endl;
+
+//     // for (int i = 0; i < multiplesofe.size(); ++i)
+//     // {
+//     //   cout << "multiples of e: " << multiplesofe.at(i) << " " << endl;
+//     // }
+//     //cout << "out of loop" << endl;
+
+//    //  for (int i = 0; i < pq.size(); ++i)
+//    //  {
+//    //    if (pq.at(i) < phi)
+//    //    {
+//    //       pq.pop_front();
+//    //    }
+//    //  }
+
+//     for (int i = 2; i < phi/5; ++i){
+//        // cout << "in the phi loop" << endl;
+//         for (int j = 1; j < multiplesofe.size(); ++j) {
+//             //cout << "in the check phi and multofe loop " << j << endl;
+//             if ((phi * i) == (multiplesofe.at(j)+1) || (phi * i) == (multiplesofe.at(j)-1)){
+//                 tempD1 = i;
+//                 //cout << tempD1 << endl;
+//                 tempD2 = j+1;
+//                 //cout << tempD2 << endl;
+//                 i = phi;
+//                 break;
+                
+//             }
+//         }
+    
+//     }
+//     if((tempD2*e - tempD1*phi) == 1) {
         
-        d = tempD2;
+//         d = tempD2;
 
-    }else {
-        d = tempD1; 
-    }
+//     }else {
+//         d = tempD1; 
+//     }
 
-    return d;
+     return d;
 }
 
 //C^d(mod n) = 1
@@ -152,7 +163,7 @@ int modBySquares (int C, int d, int n){
 
 int main()
 { 
-    //130
+
     
     //30  
     std::vector <char> message(35);
@@ -194,28 +205,44 @@ int main()
    
     findFactors(n);
     phi = findPhi(); 
+    if (e > phi) {
+        cout << "Public key is not valid!" << endl;
+        return 0;
+    }
     d = findD(e,phi);
 
-    cout << pq.at(0) << " " << pq.at(1) << " " << phi << " " << d << endl; 
-    
-//     for (int i = 0; i < messageLength - 1; ++i){
-//         cout << encryptedMsg.at(i) << " " << endl; 
-//    }
-     for (int i = 0; i < messageLength; ++i){
-        //cout << encryptedMsg.at(i) << " " << endl; 
-        decrypt = modBySquares(encryptedMsg.at(i),d,n);
-        cout << decrypt << " ";
-        //cout << message.at(decrypt - 3) << " "; 
-   }
-   cout << endl;
+    if(pq.at(0)==0 || pq.at(1)==0){
+        cout << "Public key is not valid!" << endl;
+        return 0;
+    }else if (d == 0) {
+        cout << "Public key is not valid!" << endl;
+        return 0;
+    }else if (n<0 || e<0 || messageLength<0) {
+        cout << "Public key is not valid!" << endl;
+        return 0;
+    }
+    else {
+        cout << pq.at(0) << " " << pq.at(1) << " " << phi << " " << d << endl; 
+        
+    //     for (int i = 0; i < messageLength - 1; ++i){
+    //         cout << encryptedMsg.at(i) << " " << endl; 
+    //    }
+        for (int i = 0; i < messageLength; ++i){
+            //cout << encryptedMsg.at(i) << " " << endl; 
+            decrypt = modBySquares(encryptedMsg.at(i),d,n);
+            cout << decrypt << " ";
+            //cout << message.at(decrypt - 3) << " "; 
+        }
+         cout << endl;
 
-    for (int i = 0; i < messageLength; ++i){
-        //cout << encryptedMsg.at(i) << " " << endl; 
-        decrypt = modBySquares(encryptedMsg.at(i),d,n);
-        //cout << decrypt << endl;
-        cout << message.at(decrypt - 3); 
-   }
-   cout << endl;
+        for (int i = 0; i < messageLength; ++i){
+            //cout << encryptedMsg.at(i) << " " << endl; 
+            decrypt = modBySquares(encryptedMsg.at(i),d,n);
+            //cout << decrypt << endl;
+            cout << message.at(decrypt - 3); 
+        }
+        cout << endl;
+    }
 
 
      
