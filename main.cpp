@@ -58,8 +58,14 @@ void findFactors (int num) {
                }
 
             }
+            if (i == num-1 && isPrime(num) == false) {
+                pq.push_back(0);
+                pq.push_back(0);
+                break;
+            }
          }
-      }
+      } 
+     
    }
    
 //    for loop (int i - 900)
