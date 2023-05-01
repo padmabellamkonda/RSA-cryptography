@@ -3,9 +3,16 @@
 #include <string>
 #include <cstdlib>
 #include <cmath>
+#include <algorithm>
 
 using namespace std;
 vector<int> pq;
+
+int gcd(int a, int b) {
+   if (b == 0)
+   return a;
+   return gcd(b, a % b);
+}
 
 bool isPrime(int n) {
 
@@ -30,10 +37,10 @@ bool isPrime(int n) {
 };
 
 void findFactors (int num) {
-
+    
    int product;
+  
   // cout << "goes in function" << endl;
-
    for (unsigned i = 2; i < num; ++i){
     //cout << "in loop";
       if (isPrime(i)){
@@ -44,6 +51,7 @@ void findFactors (int num) {
                
                if (product == num){
                  // cout << "loop inside";
+            
                   pq.push_back(i);
                   pq.push_back(j);
                   break;
@@ -202,7 +210,7 @@ int main()
 
 
    
-   
+
     findFactors(n);
     phi = findPhi(); 
     if (e > phi) {
@@ -211,17 +219,28 @@ int main()
     }
     d = findD(e,phi);
 
-    if(pq.at(0)==0 || pq.at(1)==0){
+    if(pq.at(0)==0 || pq.at(1)==0 || isPrime(pq.at(0)) == false || isPrime(pq.at(1)) == false || pq.at(0) == pq.at(1)){
         cout << "Public key is not valid!" << endl;
         return 0;
     }else if (d == 0) {
         cout << "Public key is not valid!" << endl;
         return 0;
-    }else if (n<0 || e<0 || messageLength<0) {
+    }else if (n<=0 || e<=0 || messageLength<=0) {
         cout << "Public key is not valid!" << endl;
         return 0;
-    }
-    else {
+    }else if (e > n || e==n || e == phi) {
+        cout << "Public key is not valid!" << endl;
+        return 0;
+    }else if ((e < 1 || e > n)) {
+        cout << "Public key is not valid!" << endl;
+        return 0;
+    }else if ((d < 1 || d > n)) {
+        cout << "Public key is not valid!" << endl;
+        return 0;
+    }else if (gcd(e,phi) != 1) {
+        cout << "Public key is not valid!" << endl;
+        return 0;
+    }else {
         cout << pq.at(0) << " " << pq.at(1) << " " << phi << " " << d << endl; 
         
     //     for (int i = 0; i < messageLength - 1; ++i){
