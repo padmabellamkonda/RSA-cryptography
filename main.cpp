@@ -65,12 +65,16 @@ void findFactors (int num) {
             // }
          }
       } 
-    if (i == num-1) {
+    if (i == (num/2)-1 && isPrime(i)==false) {
             pq.push_back(0);
             pq.push_back(0);
             break;
         }
    }
+    if(pq.at(0)==0 || pq.at(1)==0 || isPrime(pq.at(0)) == false || isPrime(pq.at(1)) == false || pq.at(0) == pq.at(1)) { 
+        pq.push_back(0);
+        pq.push_back(0);
+    }
 
    
 //    for loop (int i - 900)
