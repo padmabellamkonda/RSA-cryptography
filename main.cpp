@@ -58,15 +58,20 @@ void findFactors (int num) {
                }
 
             }
-            if (i == num-1 && isPrime(num) == false) {
-                pq.push_back(0);
-                pq.push_back(0);
-                break;
-            }
+            // if (j == num-1) {
+            //     pq.push_back(0);
+            //     pq.push_back(0);
+            //     break;
+            // }
          }
       } 
-     
+    if (i == num-1) {
+            pq.push_back(0);
+            pq.push_back(0);
+            break;
+        }
    }
+
    
 //    for loop (int i - 900)
 //         check if i prime  -> isPrime
@@ -231,10 +236,10 @@ int main()
     }else if (d == 0) {
         cout << "Public key is not valid!" << endl;
         return 0;
-    }else if (n <= 0 || e <= 0 || messageLength <= 0) {
+    }else if (n<=0 || e<=0 || messageLength<=0) {
         cout << "Public key is not valid!" << endl;
         return 0;
-    }else if (e > n || e == n || e == phi) {
+    }else if (e > n || e==n || e == phi) {
         cout << "Public key is not valid!" << endl;
         return 0;
     }else if ((e < 1 || e > n)) {
