@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include <cmath>
 #include <algorithm>
-
+//Jaydah Julian and Padma Bellamkonda
 using namespace std;
 vector<int> pq;
 
@@ -69,7 +69,7 @@ void findFactors (int num) {
             pq.push_back(0);
             pq.push_back(0);
             break;
-        }
+        } 
    }
     if(pq.at(0)==0 || pq.at(1)==0 || isPrime(pq.at(0)) == false || isPrime(pq.at(1)) == false || pq.at(0) == pq.at(1)) { 
         pq.push_back(0);
